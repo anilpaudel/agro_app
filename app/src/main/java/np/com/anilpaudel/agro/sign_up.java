@@ -36,7 +36,7 @@ public class sign_up extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_sign_up);//hello man
         SharedPreferences prefer = getApplicationContext().getSharedPreferences("user_details", 0); // 0 - for private mode
         try {
             String login_status = prefer.getString("p_l_login_status", null); // getting String
