@@ -51,8 +51,8 @@ public class login extends AppCompatActivity {
         final String server_url=getString(R.string.server_ip)+"login.php" ;
 //        final String server_url="http://192.168.0.7/agro/login.php" ;
         Toast.makeText(getApplicationContext(),server_url,Toast.LENGTH_SHORT).show();
-        final TextView view_login_response=findViewById(R.id.view_login_response);
-        view_login_response.setTextColor(Color.RED);
+    //    final TextView view_login_response=findViewById(R.id.view_login_response);
+       // view_login_response.setTextColor(Color.RED);
         final Button button_login= findViewById(R.id.button_login);
         final Button button_sign_up=findViewById(R.id.button_sign_up);
         final RequestQueue requestQueue= Volley.newRequestQueue(login.this);
@@ -73,7 +73,7 @@ public class login extends AppCompatActivity {
                 StringRequest stringRequest=new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        view_login_response.setText("jay hanuman"+response);
+                      //  view_login_response.setText("jay hanuman"+response);
                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
                         try {
                             Toast.makeText(login.this,"hello",Toast.LENGTH_SHORT).show();
@@ -131,7 +131,7 @@ public class login extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        view_login_response.setText("Something went wrong...."+error.getMessage());
+                       // view_login_response.setText("Something went wrong...."+error.getMessage());
                         error.printStackTrace();
                         requestQueue.stop();
                         //   temp_view.setText("Temperature");

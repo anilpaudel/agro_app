@@ -104,14 +104,14 @@ public class sign_up extends AppCompatActivity {
                 final String email=edit_email.getText().toString();
                 final String password=edit_password.getText().toString();
 
-                final TextView textView=findViewById(R.id.view_result);
+                //final TextView textView=findViewById(R.id.view_result);
             Toast.makeText(getApplicationContext(),"hello",Toast.LENGTH_SHORT).show();
 
                 final RequestQueue requestQueue= Volley.newRequestQueue(sign_up.this);
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        textView.setText(response);
+                        //textView.setText(response);
                        // Toast.makeText(getApplicationContext(),server_url+response,Toast.LENGTH_LONG).show();
                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
                         try {
@@ -202,8 +202,8 @@ public class sign_up extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         //view_response.setText("Something went wrong...."+error.toString());
                         error.printStackTrace();
-                        TextView textView=findViewById(R.id.view_result);
-                        textView.setText(error.getMessage());
+                       // TextView textView=findViewById(R.id.view_result);
+                        //textView.setText(error.getMessage());
                         requestQueue.stop();
 
                     }

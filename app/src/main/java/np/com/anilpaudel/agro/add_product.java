@@ -75,7 +75,7 @@ public class add_product extends AppCompatActivity {
         ArrayAdapter <CharSequence> adapter3 =ArrayAdapter.createFromResource(this,R.array.unit,android.R.layout.simple_spinner_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_unit_price.setAdapter(adapter3);
-        final TextView view_result=findViewById(R.id.view_result);
+        //final TextView view_result=findViewById(R.id.view_result);
         Button add_button= findViewById(R.id.button_add);
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
@@ -125,15 +125,15 @@ public class add_product extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
 
-                        view_result.setTextColor(Color.GREEN);
-                        view_result.setText("Jay Hanuman"+response);
-                        view_result.setMovementMethod(new ScrollingMovementMethod());
+                        //view_result.setTextColor(Color.GREEN);
+                        //view_result.setText("Jay Hanuman"+response);
+                        //view_result.setMovementMethod(new ScrollingMovementMethod());
                         requestQueue.stop();
                     }
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        view_result.setText("Something went wrong....");
+                        //view_result.setText("Something went wrong....");
                         error.printStackTrace();
                         requestQueue.stop();
 
