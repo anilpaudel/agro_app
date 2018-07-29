@@ -16,7 +16,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCL7-C2rkSttlgGKPI7A_TvlUEBOepH2tg" />
 
-        <activity android:name=".login">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,8 +35,9 @@
         <activity android:name=".market_analysis" />
         <activity android:name=".request_product" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".login" />
         <activity android:name=".display_crops" />
-        <activity android:name=".sign_up"></activity>
+        <activity android:name=".sign_up"/>
     </application>
 
 </manifest>
