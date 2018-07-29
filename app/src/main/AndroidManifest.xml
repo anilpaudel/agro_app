@@ -16,10 +16,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCL7-C2rkSttlgGKPI7A_TvlUEBOepH2tg" />
 
-        <activity android:name=".MainActivity">
+        <activity android:name=".login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -34,8 +33,9 @@
         <activity android:name=".market_prices" />
         <activity android:name=".market_analysis" />
         <activity android:name=".request_product" />
-        <activity android:name=".login" />
-        <activity android:name=".display_crops"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".display_crops" />
+        <activity android:name=".sign_up"></activity>
     </application>
 
 </manifest>

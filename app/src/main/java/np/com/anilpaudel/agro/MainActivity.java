@@ -1,6 +1,7 @@
 package np.com.anilpaudel.agro;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
        setupToolbar();
 
-        DataModel[] drawerItem = new DataModel[10];
+        DataModel[] drawerItem = new DataModel[11];
 
         drawerItem[0] = new DataModel(R.drawable.crops, "Crops");
         drawerItem[1] = new DataModel(R.drawable.agro, "Agro");
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         drawerItem[7] = new DataModel(R.drawable.notifications, "Notifications");
         drawerItem[8] = new DataModel(R.drawable.market_prices, "Market Prices");
         drawerItem[9] = new DataModel(R.drawable.market_analysis, "Market Analysis");
+        drawerItem[10] = new DataModel(R.drawable.log_out, "Log Out");
 //        drawerItem[14] = new DataModel(R.drawable.readings5, "Readings");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -116,14 +118,14 @@ public class MainActivity extends AppCompatActivity {
                 // fragment = new TableFragment();
                 break;
             case 5:
-                Intent reading = new Intent(getApplicationContext(),readings.class);
+                Intent reading = new Intent(getApplicationContext(),sign_up.class);
                 // sending data to new activity
                 reading.putExtra("team", "nepal");
                 startActivity(reading);
                 //fragment = new TableFragment();
                 break;
             case 6:
-                Intent messag = new Intent(getApplicationContext(),message.class);
+                Intent messag = new Intent(getApplicationContext(),login.class);
                 // sending data to new activity
                 messag.putExtra("team", "nepal");
                 startActivity(messag);
@@ -150,7 +152,18 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(market_analysi);
                 //fragment = new TableFragment();
                 break;
+            case 10:
+                Intent logi = new Intent(getApplicationContext(),login.class);
+                // sending data to new activity
+                logi.putExtra("team", "nepal");
 
+                SharedPreferences pref = getApplicationContext().getSharedPreferences("user_details", 0); // 0 - for private mode
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.apply(); // commit changes
+                startActivity(logi);
+                //fragment = new TableFragment();
+                break;
             default:
                 break;
         }
