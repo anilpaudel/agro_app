@@ -28,10 +28,10 @@ public class display_crops extends AppCompatActivity {
                 crops_name.setText("MAIZE");
                 break;
             }
-            case "Millet":
+            case "Corn":
             {
-                cropsImage.setImageResource(R.drawable.millet);
-                crops_name.setText("MILLET");
+                cropsImage.setImageResource(R.drawable.corn);
+                crops_name.setText("CORN");
                 break;
             }
             case "Wheat":
@@ -64,12 +64,7 @@ public class display_crops extends AppCompatActivity {
                 crops_name.setText("POTATO");
                 break;
             }
-            case "Corn":
-            {
-                cropsImage.setImageResource(R.drawable.maize);
-                crops_name.setText("CORN");
-                break;
-            }
+
             default :
             {
                 cropsImage.setImageResource(R.drawable.crops);

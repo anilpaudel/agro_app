@@ -116,38 +116,36 @@ public class sign_up extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
                         try {
 
-                            Toast.makeText(getApplicationContext(),"toast no 1     ",Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(getApplicationContext(),"toast no 1     ",Toast.LENGTH_SHORT).show();
                             JSONObject mainObject = new JSONObject(response);
-                            Toast.makeText(getApplicationContext(),"toast no one     ",Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(getApplicationContext(),"toast no one     ",Toast.LENGTH_SHORT).show();
                             String  log_error_code = mainObject.getString("error_code");
                             if(log_error_code.equals("0")) {
-                                Toast.makeText(getApplicationContext(),"toast no 2     ",Toast.LENGTH_SHORT).show();
+                             //   Toast.makeText(getApplicationContext(),"toast no 2     ",Toast.LENGTH_SHORT).show();
                                 String log_name=mainObject.getString("full_name");
-                                Toast.makeText(getApplicationContext(),"toast no 3     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 3     ",Toast.LENGTH_SHORT).show();
                               //  Toast.makeText(sign_up.this,"inside if",Toast.LENGTH_SHORT).show();
                                 String log_email = mainObject.getString("email");
-                                Toast.makeText(getApplicationContext(),"toast no 4     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 4     ",Toast.LENGTH_SHORT).show();
                                 String log_password = mainObject.getString("password");
-                                Toast.makeText(getApplicationContext(),"toast no 5     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 5     ",Toast.LENGTH_SHORT).show();
                                 String log_contact_no = mainObject.getString("contact_no");
-                                Toast.makeText(getApplicationContext(),"toast no 6     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 6     ",Toast.LENGTH_SHORT).show();
                                 String log_token = mainObject.getString("login_token");
-                                Toast.makeText(getApplicationContext(),"toast no 7     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 7     ",Toast.LENGTH_SHORT).show();
                                 String log_occupation = mainObject.getString("occupation");
-                                Toast.makeText(getApplicationContext(),"toast no 8     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 8     ",Toast.LENGTH_SHORT).show();
                                 String log_age = mainObject.getString("age");
-                                Toast.makeText(getApplicationContext(),"toast no 9     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 9     ",Toast.LENGTH_SHORT).show();
                                 String log_gender = mainObject.getString("gender");
-                                Toast.makeText(getApplicationContext(),"toast no 10     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 10     ",Toast.LENGTH_SHORT).show();
                                 String log_address = mainObject.getString("address");
-                                Toast.makeText(getApplicationContext(),"toast no 1     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 1     ",Toast.LENGTH_SHORT).show();
                                 String log_address_name = mainObject.getString("address_name");
-                                Toast.makeText(getApplicationContext(),"toast no 11     ",Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(getApplicationContext(),"toast no 11     ",Toast.LENGTH_SHORT).show();
                                 String log_id=mainObject.getString("id");
-                                Toast.makeText(getApplicationContext(),"toast no 12    ",Toast.LENGTH_SHORT).show();
                                 String comment=mainObject.getString("comment");
-                                Toast.makeText(getApplicationContext(),"toast no 13    ",Toast.LENGTH_SHORT).show();
-                                Toast.makeText(getApplicationContext(), "log are"+comment + log_password + log_email + log_contact_no + log_occupation+ log_age + log_gender + log_address, Toast.LENGTH_LONG).show();
+                              //  Toast.makeText(getApplicationContext(), "log are"+comment + log_password + log_email + log_contact_no + log_occupation+ log_age + log_gender + log_address, Toast.LENGTH_LONG).show();
                                 SharedPreferences pref = getApplicationContext().getSharedPreferences("user_details", 0); // 0 - for private mode
                                 SharedPreferences.Editor editor = pref.edit();
                                 editor.putString("p_l_email", log_email);
@@ -162,7 +160,7 @@ public class sign_up extends AppCompatActivity {
                                 editor.putString("p_l_id", log_id);
                                 editor.putString("p_l_password", log_password);
                                 editor.putString("p_l_login_status", "1");
-                                Toast.makeText(getApplicationContext(),"toast after preference     ",Toast.LENGTH_SHORT).show();
+                           //     Toast.makeText(getApplicationContext(),"toast after preference     ",Toast.LENGTH_SHORT).show();
                                 editor.commit();
                                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                                 startActivity(i);

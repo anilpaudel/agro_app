@@ -5,8 +5,8 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="server_ip">http://192.168.0.7/agro/</string>
-    <string name="flask_ip">http://192.168.0.1</string>
-    <string name="node_mcu_ip">http://192.168.0.1</string>
+    <string name="flask_ip">http://192.168.0.9:8090/yoAndroid</string>
+    <string name="node_mcu_ip">http://192.168.0.13/bodyAndroid</string>
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>

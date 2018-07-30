@@ -35,33 +35,25 @@ public class MainActivity extends AppCompatActivity {
         mNavigationDrawerItemTitles= getResources().getStringArray(R.array.navigation_drawer_items_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        Button myButton= (Button)findViewById(R.id.button4);
-        myButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),SecondActivity.class);
-                // sending data to new activity
-                i.putExtra("team", "nepal");
-                startActivity(i);
-            }
-        });
+
 
        setupToolbar();
 
-        DataModel[] drawerItem = new DataModel[12];
+        DataModel[] drawerItem = new DataModel[7];
 
         drawerItem[0] = new DataModel(R.drawable.crops, "Crops");
         drawerItem[1] = new DataModel(R.drawable.agro, "Agro");
-        drawerItem[2] = new DataModel(R.drawable.add_product, "Add");
-        drawerItem[3] = new DataModel(R.drawable.request_product, "Request");
-        drawerItem[4] = new DataModel(R.drawable.my_activity, "Activity");
-        drawerItem[5] = new DataModel(R.drawable.readings, "Readings");
-        drawerItem[6] = new DataModel(R.drawable.message, "Message");
-        drawerItem[7] = new DataModel(R.drawable.notifications, "Notifications");
-        drawerItem[8] = new DataModel(R.drawable.market_prices, "Market Prices");
-        drawerItem[9] = new DataModel(R.drawable.market_analysis, "Market Analysis");
-        drawerItem[10] = new DataModel(R.drawable.about, "About");
-        drawerItem[11] = new DataModel(R.drawable.log_out, "Log Out");
+        drawerItem[2] = new DataModel(R.drawable.request_product, "Requests");
+        drawerItem[3] = new DataModel(R.drawable.add_product, "Add");
+        drawerItem[4] = new DataModel(R.drawable.request_product, "Request");
+      //  drawerItem[5] = new DataModel(R.drawable.my_activity, "Activity");
+      //  drawerItem[6] = new DataModel(R.drawable.readings, "Readings");
+      //  drawerItem[7] = new DataModel(R.drawable.message, "Message");
+       // drawerItem[8] = new DataModel(R.drawable.notifications, "Notifications");
+       // drawerItem[9] = new DataModel(R.drawable.market_prices, "Market Prices");
+       // drawerItem[10] = new DataModel(R.drawable.market_analysis, "Market Analysis");
+        drawerItem[5] = new DataModel(R.drawable.about, "About");
+        drawerItem[6] = new DataModel(R.drawable.log_out, "Log Out");
 //        drawerItem[14] = new DataModel(R.drawable.readings5, "Readings");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -95,72 +87,81 @@ public class MainActivity extends AppCompatActivity {
                 // sending data to new activity
                 agr.putExtra("team", "nepal");
                 startActivity(agr);
-                fragment = new FixturesFragment();
+            //    fragment = new FixturesFragment();
                 break;
             case 2:
+                Intent requ = new Intent(getApplicationContext(),requests.class);
+                // sending data to new activity
+                requ.putExtra("team", "nepal");
+                startActivity(requ);
+                // fragment = new TableFragment();
+                break;
+                case 3:
                 Intent add_produc = new Intent(getApplicationContext(),add_product.class);
                 // sending data to new activity
                 add_produc.putExtra("team", "nepal");
                 startActivity(add_produc);
                 // fragment = new TableFragment();
                 break;
-            case 3:
+            case 4:
                 Intent request_produc = new Intent(getApplicationContext(),request_product.class);
                 // sending data to new activity
                 request_produc.putExtra("team", "nepal");
                 startActivity(request_produc);
                 // fragment = new TableFragment();
                 break;
-            case 4:
+           /*
+            case 5:
                 Intent my_activit = new Intent(getApplicationContext(),my_activity.class);
                 // sending data to new activity
                 my_activit.putExtra("team", "nepal");
                 startActivity(my_activit);
                 // fragment = new TableFragment();
                 break;
-            case 5:
+            case 6:
                 Intent reading = new Intent(getApplicationContext(),sign_up.class);
                 // sending data to new activity
                 reading.putExtra("team", "nepal");
                 startActivity(reading);
                 //fragment = new TableFragment();
                 break;
-            case 6:
+            case 7:
                 Intent messag = new Intent(getApplicationContext(),login.class);
                 // sending data to new activity
                 messag.putExtra("team", "nepal");
                 startActivity(messag);
                 // fragment = new TableFragment();
                 break;
-            case 7:
+            case 8:
                 Intent notification = new Intent(getApplicationContext(),notifications.class);
                 // sending data to new activity
                 notification.putExtra("team", "nepal");
                 startActivity(notification);
                 //fragment = new TableFragment();
                 break;
-            case 8:
+            case 9:
                 Intent market_pric = new Intent(getApplicationContext(),market_prices.class);
                 // sending data to new activity
                 market_pric.putExtra("team", "nepal");
                 startActivity(market_pric);
                 //fragment = new TableFragment();
                 break;
-            case 9:
+            case 10:
                 Intent market_analysi = new Intent(getApplicationContext(),market_analysis.class);
                 // sending data to new activity
                 market_analysi.putExtra("team", "nepal");
                 startActivity(market_analysi);
                 //fragment = new TableFragment();
                 break;
-            case 10:
+                */
+            case 5:
                 Intent abou = new Intent(getApplicationContext(),about.class);
                 // sending data to new activity
                 abou.putExtra("team", "nepal");
                 startActivity(abou);
                 //fragment = new TableFragment();
                 break;
-            case 11:
+            case 6:
                 Intent logi = new Intent(getApplicationContext(),login.class);
                 // sending data to new activity
                 logi.putExtra("team", "nepal");

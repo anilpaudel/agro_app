@@ -40,7 +40,9 @@
         <activity android:name=".login" />
         <activity android:name=".display_crops" />
         <activity android:name=".sign_up" />
-        <activity android:name=".about"></activity>
+        <activity android:name=".about" />
+        <activity android:name=".requests" />
+        <activity android:name=".DetailActivity"></activity>
     </application>
 
 </manifest>

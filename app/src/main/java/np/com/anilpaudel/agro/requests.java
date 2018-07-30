@@ -1,42 +1,42 @@
 package np.com.anilpaudel.agro;
 
-        import android.app.Activity;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.AdapterView;
-        import android.widget.ArrayAdapter;
-        import android.widget.ImageView;
-        import android.widget.ListView;
-        import android.widget.TextView;
-        import android.widget.Toast;
-        import com.android.volley.AuthFailureError;
-        import com.android.volley.Request;
-        import com.android.volley.RequestQueue;
-        import com.android.volley.Response;
-        import com.android.volley.VolleyError;
-        import com.android.volley.toolbox.StringRequest;
-        import com.android.volley.toolbox.Volley;
-        import org.json.JSONArray;
-        import org.json.JSONException;
-        import org.json.JSONObject;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.List;
-        import java.util.Map;
-public class agro extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+public class requests extends AppCompatActivity {
 
     private ArrayList<Property> rentalProperties = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_agro);
+        setContentView(R.layout.activity_requests);
         final ArrayAdapter<Property> adapter = new propertyArrayAdapter(this, 0, rentalProperties);
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -45,7 +45,7 @@ public class agro extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
 
-                 //   Toast.makeText(getApplicationContext(), "toast no 1     "+response, Toast.LENGTH_SHORT).show();
+                //    Toast.makeText(getApplicationContext(), "toast no 1     "+response, Toast.LENGTH_SHORT).show();
                     JSONArray mainObject = new JSONArray(response);
                     for (int n = 0; n < mainObject.length(); n++) {
                         JSONObject result = mainObject.getJSONObject(n);
@@ -90,10 +90,8 @@ public class agro extends AppCompatActivity {
                                 request_timestamp));
                     }
 
-                   // Toast.makeText(getApplicationContext(), "toast no 6     ", Toast.LENGTH_SHORT).show();
                     ListView listView = (ListView) findViewById(R.id.customListView);
 
-                   // Toast.makeText(getApplicationContext(), "toast no 7     ", Toast.LENGTH_SHORT).show();
                     listView.setAdapter(adapter);
                     AdapterView.OnItemClickListener adapterViewListener = new AdapterView.OnItemClickListener() {
 
@@ -101,11 +99,10 @@ public class agro extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                             Property property = rentalProperties.get(position);
-
-                            Intent intent = new Intent(agro.this, DetailActivity.class);
+                            Intent intent = new Intent(requests.this, DetailActivity.class);
                             intent.putExtra("item_categories", property.getItem_categories());
-                            intent.putExtra(" req_user_name", property.getReq_user_name());
-                            intent.putExtra(" quantity_unit", property.getQuantity_unit());
+                            intent.putExtra("req_user_name", property.getReq_user_name());
+                            intent.putExtra("quantity_unit", property.getQuantity_unit());
                             intent.putExtra("item_name ", property.getItem_name());
                             intent.putExtra("req_price", property.getReq_price());
                             intent.putExtra("req_price_unit", property.getReq_price_unit());
@@ -135,7 +132,7 @@ public class agro extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(agro.this, "You are not con" + error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(requests.this, "You are not con" + error.getMessage(), Toast.LENGTH_LONG).show();
                 error.printStackTrace();
                 requestQueue.stop();
 

@@ -68,8 +68,12 @@ public class crops extends AppCompatActivity  {
         final EditText temp_crops=(EditText) findViewById(R.id.temp_crops);
         final EditText moisture_crops=(EditText) findViewById(R.id.moisture_crops);
         final EditText humidity_crops=(EditText) findViewById(R.id.humidity_crops);
-        final String server_node_mcu="http://www.protocal.me/agro/node_mcu.php";
-        final String server_flask="http://www.protocal.me/agro/flask.php";
+     //   final String server_node_mcu="http://www.protocal.me/agro/node_mcu.php";
+        final String server_node_mcu=getString(R.string.node_mcu_ip);
+        final String server_flask=getString(R.string.flask_ip);
+
+       // final String server_flask="http://www.protocal.me/agro/flask.php";
+
         //final TextView textView=findViewById(R.id.response_view);
         //final TextView textView2=findViewById(R.id.responseView2);
         //textView2.setTextColor(Color.RED);
@@ -250,11 +254,11 @@ public class crops extends AppCompatActivity  {
                                 startActivity(inte);
                                 break;
                             }
-                            case "Millet":
+                            case "Corn":
                             {
 
                                 Intent inte = new Intent(getApplicationContext(), display_crops.class);
-                                inte.putExtra("crops", "Millet");
+                                inte.putExtra("crops", "Corn");
                                 startActivity(inte);
                                 break;
                             }
@@ -318,8 +322,8 @@ public class crops extends AppCompatActivity  {
                     {
                         Map <String, String> params = new HashMap<String, String>();
                         params.put("temperature",temp);
-                        params.put("humidity",moisture);
-                        params.put("moisture",humidity);
+                        params.put("moisture",moisture);
+                        params.put("humidity",humidity);
 
                       //  params.put("json_array",value);
                         return  params;
@@ -332,5 +336,3 @@ public class crops extends AppCompatActivity  {
 
     }
 }
-
-

@@ -44,13 +44,13 @@ public class login extends AppCompatActivity {
         }
         catch (NullPointerException e)
         {
-            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
         }
         final EditText edit_user=(EditText) findViewById(R.id.edit_user);
         final EditText edit_password=(EditText) findViewById(R.id.edit_password);
         final String server_url=getString(R.string.server_ip)+"login.php" ;
 //        final String server_url="http://192.168.0.7/agro/login.php" ;
-        Toast.makeText(getApplicationContext(),server_url,Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(getApplicationContext(),server_url,Toast.LENGTH_SHORT).show();
     //    final TextView view_login_response=findViewById(R.id.view_login_response);
        // view_login_response.setTextColor(Color.RED);
         final Button button_login= findViewById(R.id.button_login);
@@ -74,18 +74,18 @@ public class login extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                       //  view_login_response.setText("jay hanuman"+response);
-                        Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
+                       Toast.makeText(getApplicationContext(),response,Toast.LENGTH_SHORT).show();
                         try {
-                            Toast.makeText(login.this,"hello",Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(login.this,"hello",Toast.LENGTH_SHORT).show();
                             JSONObject mainObject = new JSONObject(response);
-                            Toast.makeText(login.this,"whatsup",Toast.LENGTH_SHORT).show();
+                        //    Toast.makeText(login.this,"whatsup",Toast.LENGTH_SHORT).show();
 
                             String  log_error_code = mainObject.getString("error_code");
                             if(log_error_code.equals("0")) {
 
                                 String log_name=mainObject.getString("full_name");
 
-                                Toast.makeText(login.this,"inside if",Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(login.this,"inside if",Toast.LENGTH_SHORT).show();
                                 String log_email = mainObject.getString("email");
                                 String log_password = mainObject.getString("password");
                                 String log_contact_no = mainObject.getString("contact_no");
@@ -96,7 +96,7 @@ public class login extends AppCompatActivity {
                                 String log_address = mainObject.getString("address");
                                 String log_address_name = mainObject.getString("address_name");
                                 String log_id=mainObject.getString("id");
-                                Toast.makeText(getApplicationContext(), "log are" + log_password + log_email + log_contact_no + log_occupation+ log_age + log_gender + log_address, Toast.LENGTH_LONG).show();
+                           //     Toast.makeText(getApplicationContext(), "log are" + log_password + log_email + log_contact_no + log_occupation+ log_age + log_gender + log_address, Toast.LENGTH_LONG).show();
                                 SharedPreferences pref = getApplicationContext().getSharedPreferences("user_details", 0); // 0 - for private mode
                                 SharedPreferences.Editor editor = pref.edit();
                                 editor.putString("p_l_email", log_email);
