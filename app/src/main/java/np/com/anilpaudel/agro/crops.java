@@ -70,9 +70,9 @@ public class crops extends AppCompatActivity  {
         final EditText humidity_crops=(EditText) findViewById(R.id.humidity_crops);
         final String server_node_mcu="http://www.protocal.me/agro/node_mcu.php";
         final String server_flask="http://www.protocal.me/agro/flask.php";
-        final TextView textView=findViewById(R.id.response_view);
-        final TextView textView2=findViewById(R.id.responseView2);
-        textView2.setTextColor(Color.RED);
+        //final TextView textView=findViewById(R.id.response_view);
+        //final TextView textView2=findViewById(R.id.responseView2);
+        //textView2.setTextColor(Color.RED);
         Button data_sensor= findViewById(R.id.data_sensor);
         final Button request_crops=findViewById(R.id.request_crops);
         final RequestQueue requestQueue= Volley.newRequestQueue(crops.this);
@@ -304,7 +304,7 @@ public class crops extends AppCompatActivity  {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        textView.setText("Something went wrong...."+error.getMessage());
+                        //textView.setText("Something went wrong...."+error.getMessage());
                         error.printStackTrace();
                         requestQueue.stop();
                      //   temp_view.setText("Temperature");

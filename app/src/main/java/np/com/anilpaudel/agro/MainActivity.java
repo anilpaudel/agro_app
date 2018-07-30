@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
        setupToolbar();
 
-        DataModel[] drawerItem = new DataModel[11];
+        DataModel[] drawerItem = new DataModel[12];
 
         drawerItem[0] = new DataModel(R.drawable.crops, "Crops");
         drawerItem[1] = new DataModel(R.drawable.agro, "Agro");
@@ -60,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
         drawerItem[7] = new DataModel(R.drawable.notifications, "Notifications");
         drawerItem[8] = new DataModel(R.drawable.market_prices, "Market Prices");
         drawerItem[9] = new DataModel(R.drawable.market_analysis, "Market Analysis");
-        drawerItem[10] = new DataModel(R.drawable.log_out, "Log Out");
+        drawerItem[10] = new DataModel(R.drawable.about, "About");
+        drawerItem[11] = new DataModel(R.drawable.log_out, "Log Out");
 //        drawerItem[14] = new DataModel(R.drawable.readings5, "Readings");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -153,6 +154,13 @@ public class MainActivity extends AppCompatActivity {
                 //fragment = new TableFragment();
                 break;
             case 10:
+                Intent abou = new Intent(getApplicationContext(),about.class);
+                // sending data to new activity
+                abou.putExtra("team", "nepal");
+                startActivity(abou);
+                //fragment = new TableFragment();
+                break;
+            case 11:
                 Intent logi = new Intent(getApplicationContext(),login.class);
                 // sending data to new activity
                 logi.putExtra("team", "nepal");
