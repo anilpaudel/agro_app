@@ -1,6 +1,7 @@
 package np.com.anilpaudel.agro;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -62,7 +63,7 @@ public class add_product extends AppCompatActivity {
         final String[] location_name={""};
         final String[] longitude = {""};
         final String[] latitude = {""};
-
+        final String server_url=getString(R.string.server_ip)+"add_product.php" ;
         final Spinner spinner_category= findViewById(R.id.spinner_category);
         ArrayAdapter<CharSequence> adapter1 =ArrayAdapter.createFromResource(this,R.array.category_product,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -115,15 +116,17 @@ public class add_product extends AppCompatActivity {
                 final String description=edit_description.getText().toString();
                 final String price=edit_price.getText().toString();
 
+                final SharedPreferences pref = getApplicationContext().getSharedPreferences("user_details", 0); // 0 - for private mode
                 Toast.makeText(add_product.this,category+unit+unit_price,Toast.LENGTH_SHORT).show();
                 Toast.makeText(add_product.this,"latitude is:"+latitude[0]+"longitude is:"+longitude[0]+unit_price+
                         location_name[0]+location_address[0],
                         Toast.LENGTH_SHORT).show();
                 final RequestQueue requestQueue= Volley.newRequestQueue(add_product.this);
-                StringRequest stringRequest=new StringRequest(Request.Method.POST, "  ", new Response.Listener<String>()
+                StringRequest stringRequest=new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>()
                 {
                     @Override
                     public void onResponse(String response) {
+                        Toast.makeText(add_product.this,"here we go response is"+response,Toast.LENGTH_SHORT).show();
 
                         //view_result.setTextColor(Color.GREEN);
                         //view_result.setText("Jay Hanuman"+response);
@@ -133,7 +136,11 @@ public class add_product extends AppCompatActivity {
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+<<<<<<< HEAD
                         //view_result.setText("Something went wrong....");
+=======
+                        view_result.setText("Something went wrong...."+error.getMessage());
+>>>>>>> 00e51ce7c38b17a7f7082fb4918eb1233d3e4f0e
                         error.printStackTrace();
                         requestQueue.stop();
 
@@ -144,26 +151,30 @@ public class add_product extends AppCompatActivity {
                     protected Map<String,String> getParams() throws AuthFailureError
                     {
                         Map <String, String> params = new HashMap<String, String>();
-                        params.put("unit",unit);
-                        params.put("unit_price",unit_price);
-                        params.put("category",category);
+                        params.put("item_categories",category);
+                        params.put("quantity_unit",unit);
+                        params.put("req_price",price);
+                        params.put("req_price_unit",unit_price);
                         params.put("quantity",item_quantity);
-                        params.put("name",item_name);
-                        params.put("date",date);
-                        params.put("location_address",location_address[0]);
-                        params.put("location_name",location_name[0]);
-                        params.put("price",price);
-                        params.put("latitude", latitude[0]);
-                        params.put("longitude",latitude[0]);
-                        params.put("description",description);
+                        params.put("item_name",item_name);
+                        params.put("req_end_date",date);
+                        params.put("req_address",location_address[0]);
+                        params.put("req_address_name",location_name[0]);
+                        params.put("req_address_latitude", latitude[0]);
+                        params.put("req_address_longitude",longitude[0]);
+                        params.put("req_description",description);
+                        params.put("req_user_id",pref.getString("p_l_id", null)); // getting String);
+                        params.put("req_user_name",pref.getString("p_l_full_name", null));
+                        params.put("req_occupation",pref.getString("p_l_occupation", null));
+                        params.put("req_email",pref.getString("p_l_email", null));
+                        params.put("req_contact_no",pref.getString("p_l_contact_no", null));
+                        params.put("req_login_token",pref.getString("p_l_login_token", null));
                         return  params;
-
                     }
                 }
                         ;
                 requestQueue.add(stringRequest);
             }
         });
-
         }
     }
