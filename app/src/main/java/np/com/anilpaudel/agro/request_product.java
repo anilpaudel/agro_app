@@ -51,6 +51,8 @@ import java.util.Map;
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_request_product);
+            final preferences_server_ip ip=new preferences_server_ip(getApplicationContext());
+            final preferences_user_details user_details=new preferences_user_details(getApplicationContext());
             final LatLng[] latlng = new LatLng[1];
             final double[] lat = new double[1];
             final double[] lng =new double[1] ;
@@ -63,7 +65,7 @@ import java.util.Map;
             final String[] location_name={""};
             final String[] longitude = {""};
             final String[] latitude = {""};
-            final String server_url=getString(R.string.server_ip)+"request_product.php" ;
+            final String server_url=ip.ip_server+"request_product.php" ;
             final Spinner spinner_category= findViewById(R.id.spinner_category);
             ArrayAdapter<CharSequence> adapter1 =ArrayAdapter.createFromResource(this,R.array.category_product,android.R.layout.simple_spinner_item);
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -141,6 +143,8 @@ import java.util.Map;
 //=======
                             // view_result.setText("Something went wrong...."+error.getMessage());
 //>>>>>>> 00e51ce7c38b17a7f7082fb4918eb1233d3e4f0e
+                            Toast.makeText(getApplicationContext(),"here we go response is"+error.getMessage(),Toast.LENGTH_SHORT).show();
+
                             error.printStackTrace();
                             requestQueue.stop();
 
@@ -151,6 +155,8 @@ import java.util.Map;
                         protected Map<String,String> getParams() throws AuthFailureError
                         {
                             Map <String, String> params = new HashMap<String, String>();
+                            params.put("id_user",user_details.id_user);
+                            params.put("login_token",user_details.login_token);
                             params.put("item_categories",category);
                             params.put("quantity_unit",unit);
                             params.put("req_price",price);

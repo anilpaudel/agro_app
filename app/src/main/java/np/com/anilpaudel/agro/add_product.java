@@ -51,6 +51,8 @@ public class add_product extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
+        final preferences_server_ip ip=new preferences_server_ip(getApplicationContext());
+        final preferences_user_details user_details=new preferences_user_details(getApplicationContext());
         final LatLng[] latlng = new LatLng[1];
         final double[] lat = new double[1];
         final double[] lng =new double[1] ;
@@ -63,7 +65,7 @@ public class add_product extends AppCompatActivity {
         final String[] location_name={""};
         final String[] longitude = {""};
         final String[] latitude = {""};
-        final String server_url=getString(R.string.server_ip)+"add_product.php" ;
+        final String server_url=ip.ip_server+"add_product.php" ;
         final Spinner spinner_category= findViewById(R.id.spinner_category);
         ArrayAdapter<CharSequence> adapter1 =ArrayAdapter.createFromResource(this,R.array.category_product,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -112,7 +114,6 @@ public class add_product extends AppCompatActivity {
                 final String item_name=edit_name.getText().toString();
                 final String item_quantity=edit_quantity.getText().toString();
                 final String date=edit_date.getText().toString();
-
                 final String description=edit_description.getText().toString();
                 final String price=edit_price.getText().toString();
 
@@ -151,6 +152,8 @@ public class add_product extends AppCompatActivity {
                     protected Map<String,String> getParams() throws AuthFailureError
                     {
                         Map <String, String> params = new HashMap<String, String>();
+                        params.put("id_user",user_details.id_user);
+                        params.put("login_token",user_details.login_token);
                         params.put("item_categories",category);
                         params.put("quantity_unit",unit);
                         params.put("pro_price",price);

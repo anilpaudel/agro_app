@@ -37,6 +37,7 @@ public class sign_up extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);//hello man
+        final preferences_server_ip ip=new preferences_server_ip(getApplicationContext());
         SharedPreferences prefer = getApplicationContext().getSharedPreferences("user_details", 0); // 0 - for private mode
         try {
             String login_status = prefer.getString("p_l_login_status", null); // getting String
@@ -49,7 +50,7 @@ public class sign_up extends AppCompatActivity {
         {
             Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
         }
-        final String server_url=getString(R.string.server_ip)+"sign_up.php";
+        final String server_url=ip.ip_server+"sign_up.php";
         final Button sign_up_button= findViewById(R.id.button_sign_up);
         final EditText edit_name=(EditText)findViewById(R.id.edit_name);
         final EditText edit_email=(EditText)findViewById(R.id.edit_email);
@@ -161,9 +162,10 @@ public class sign_up extends AppCompatActivity {
                                 editor.putString("p_l_password", log_password);
                                 editor.putString("p_l_login_status", "1");
                            //     Toast.makeText(getApplicationContext(),"toast after preference     ",Toast.LENGTH_SHORT).show();
-                                editor.commit();
+                                editor.apply();
                                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
                                 startActivity(i);
+                                finish();
                             }
                             else
                             {

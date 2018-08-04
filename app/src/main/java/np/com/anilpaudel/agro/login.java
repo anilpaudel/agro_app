@@ -32,23 +32,36 @@ public class login extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
+        final preferences_server_ip ip=new preferences_server_ip(getApplicationContext());
+        SharedPreferences prefer_server_init = getApplicationContext().getSharedPreferences("server_set_up", 0); // 0 - for private mode
+        if(!prefer_server_init.contains("server_ip"))
+        {
+            SharedPreferences.Editor editor_server_init=prefer_server_init.edit();
+            editor_server_init.putString("server_ip",getString(R.string.server_ip) );
+            editor_server_init.putString("flask_ip",getString(R.string.flask_ip) );
+            editor_server_init.putString("node_mcu_ip",getString(R.string.node_mcu_ip) );
+            editor_server_init.apply();
+        }
+        Toast.makeText(getApplicationContext(),ip.ip_flask,Toast.LENGTH_SHORT).show();
         SharedPreferences prefer = getApplicationContext().getSharedPreferences("user_details", 0); // 0 - for private mode
         try {
             String login_status = prefer.getString("p_l_login_status", null); // getting String
             if (login_status.equals("1")) {
                 Intent i = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(i);
+                finish();
             }
         }
         catch (NullPointerException e)
         {
 //            Toast.makeText(getApplicationContext(),e.getMessage(),Toast.LENGTH_SHORT).show();
         }
+
+
+
         final EditText edit_user=(EditText) findViewById(R.id.edit_user);
         final EditText edit_password=(EditText) findViewById(R.id.edit_password);
-        final String server_url=getString(R.string.server_ip)+"login.php" ;
+        final String server_url=ip.ip_server+"login.php" ;
 //        final String server_url="http://192.168.0.7/agro/login.php" ;
       //  Toast.makeText(getApplicationContext(),server_url,Toast.LENGTH_SHORT).show();
     //    final TextView view_login_response=findViewById(R.id.view_login_response);
@@ -63,6 +76,16 @@ public class login extends AppCompatActivity {
                                                   startActivity(inte);
                                               }
                                           });
+        final Button button_server_set_up=findViewById(R.id.button_server_set_up);
+        button_server_set_up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent inten = new Intent(getApplicationContext(), server_set_up.class);
+                startActivity(inten);
+            }
+        });
+
+
 
         button_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +136,9 @@ public class login extends AppCompatActivity {
                                 editor.putString("p_l_login_status", "1");
                                 editor.commit();
                                 Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(i);
+                                finish();
                             }
                             else
                             {

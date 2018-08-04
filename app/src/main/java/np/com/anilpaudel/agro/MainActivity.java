@@ -39,21 +39,21 @@ public class MainActivity extends AppCompatActivity {
 
        setupToolbar();
 
-        DataModel[] drawerItem = new DataModel[7];
+        DataModel[] drawerItem = new DataModel[8];
 
         drawerItem[0] = new DataModel(R.drawable.crops, "Crops");
         drawerItem[1] = new DataModel(R.drawable.agro, "Agro");
         drawerItem[2] = new DataModel(R.drawable.request_product, "Requests");
         drawerItem[3] = new DataModel(R.drawable.add_product, "Add");
         drawerItem[4] = new DataModel(R.drawable.request_product, "Request");
-      //  drawerItem[5] = new DataModel(R.drawable.my_activity, "Activity");
+        drawerItem[5] = new DataModel(R.drawable.my_activity, "Activity");
       //  drawerItem[6] = new DataModel(R.drawable.readings, "Readings");
       //  drawerItem[7] = new DataModel(R.drawable.message, "Message");
        // drawerItem[8] = new DataModel(R.drawable.notifications, "Notifications");
        // drawerItem[9] = new DataModel(R.drawable.market_prices, "Market Prices");
        // drawerItem[10] = new DataModel(R.drawable.market_analysis, "Market Analysis");
-        drawerItem[5] = new DataModel(R.drawable.about, "About");
-        drawerItem[6] = new DataModel(R.drawable.log_out, "Log Out");
+        drawerItem[6] = new DataModel(R.drawable.about, "About");
+        drawerItem[7] = new DataModel(R.drawable.log_out, "Log Out");
 //        drawerItem[14] = new DataModel(R.drawable.readings5, "Readings");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(request_produc);
                 // fragment = new TableFragment();
                 break;
-           /*
+
             case 5:
                 Intent my_activit = new Intent(getApplicationContext(),my_activity.class);
                 // sending data to new activity
@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(my_activit);
                 // fragment = new TableFragment();
                 break;
+                /*
             case 6:
                 Intent reading = new Intent(getApplicationContext(),sign_up.class);
                 // sending data to new activity
@@ -154,14 +155,14 @@ public class MainActivity extends AppCompatActivity {
                 //fragment = new TableFragment();
                 break;
                 */
-            case 5:
+            case 6:
                 Intent abou = new Intent(getApplicationContext(),about.class);
                 // sending data to new activity
                 abou.putExtra("team", "nepal");
                 startActivity(abou);
                 //fragment = new TableFragment();
                 break;
-            case 6:
+            case 7:
                 Intent logi = new Intent(getApplicationContext(),login.class);
                 // sending data to new activity
                 logi.putExtra("team", "nepal");
@@ -171,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.clear();
                 editor.apply(); // commit changes
                 startActivity(logi);
+                finish();
                 //fragment = new TableFragment();
                 break;
             default:

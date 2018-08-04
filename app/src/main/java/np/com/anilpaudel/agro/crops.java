@@ -65,12 +65,13 @@ public class crops extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crops);
+        final preferences_server_ip ip=new preferences_server_ip(getApplicationContext());
         final EditText temp_crops=(EditText) findViewById(R.id.temp_crops);
         final EditText moisture_crops=(EditText) findViewById(R.id.moisture_crops);
         final EditText humidity_crops=(EditText) findViewById(R.id.humidity_crops);
      //   final String server_node_mcu="http://www.protocal.me/agro/node_mcu.php";
-        final String server_node_mcu=getString(R.string.node_mcu_ip);
-        final String server_flask=getString(R.string.flask_ip);
+        final String server_node_mcu=ip.ip_node_mcu;
+        final String server_flask=ip.ip_flask;
 
        // final String server_flask="http://www.protocal.me/agro/flask.php";
 
@@ -228,7 +229,35 @@ public class crops extends AppCompatActivity  {
                 final String moisture=moisture_crops.getText().toString();
                 final String humidity=humidity_crops.getText().toString();
                 final RequestQueue requestQueue= Volley.newRequestQueue(crops.this);
+                String error_message = "";
+                try {
 
+                    int temp_int = Integer.parseInt(temp);
+                    int moisture_int = Integer.parseInt(moisture);
+                    int humidity_int = Integer.parseInt(humidity);
+                    int error = 0;
+                    if (temp_int < 5 || temp_int > 50) {
+                        error = 1;
+                        error_message = "Temperature range is invalid.\n";
+                    }
+                    if (moisture_int >= 100 || moisture_int < 9) {
+                        error_message += "Moisture range is invalid.\n";
+                        error = 1;
+                    }
+                    if (humidity_int >= 100 || humidity_int <= 1) {
+                        error_message += "Humidity range is invalid.";
+                        error = 1;
+                    }
+                    if (error == 1) {
+                        Toast.makeText(getApplicationContext(), error_message, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
+                catch (java.lang.NumberFormatException e)
+                {
+                    Toast.makeText(getApplicationContext(), "field is empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 StringRequest stringRequest=new StringRequest(Request.Method.POST, server_flask, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String responses) {
@@ -310,6 +339,7 @@ public class crops extends AppCompatActivity  {
                     public void onErrorResponse(VolleyError error) {
                         //textView.setText("Something went wrong...."+error.getMessage());
                         error.printStackTrace();
+                        Toast.makeText(getApplicationContext(),"Temporarily unavailable",Toast.LENGTH_SHORT).show();
                         requestQueue.stop();
                      //   temp_view.setText("Temperature");
 
@@ -324,7 +354,6 @@ public class crops extends AppCompatActivity  {
                         params.put("temperature",temp);
                         params.put("moisture",moisture);
                         params.put("humidity",humidity);
-
                       //  params.put("json_array",value);
                         return  params;
 

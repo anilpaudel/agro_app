@@ -20,7 +20,7 @@ public class Property {
     private String req_email;
     private String req_contact_no;
     private String request_timestamp;
-
+    private String distance;
 
 
     //constructor
@@ -42,7 +42,8 @@ public class Property {
             String req_occupation ,
             String req_email,
             String req_contact_no,
-            String request_timestamp)
+            String request_timestamp,
+            String distance)
     {
         this.item_categories=item_categories;
         this.req_user_name=req_user_name;
@@ -62,6 +63,7 @@ public class Property {
         this.req_email=req_email;
         this.req_contact_no=req_contact_no;
         this.request_timestamp=request_timestamp;
+        this.distance=distance;
 
     }
 
@@ -85,5 +87,6 @@ public class Property {
     public String getReq_email() {return req_email;}
     public String getReq_contact_no() {return req_contact_no;}
     public String getRequest_timestamp() {return request_timestamp;}
+    public String getDistance() { return  distance;}
 }
 

@@ -38,21 +38,20 @@ public class requests extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_requests);
         final ArrayAdapter<Property> adapter = new propertyArrayAdapter(this, 0, rentalProperties);
+        final preferences_server_ip ip=new preferences_server_ip(getApplicationContext());
+        final preferences_user_details user_details=new preferences_user_details(getApplicationContext());
 
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.0.7/agro/request_list.php", new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ip.ip_server+"request_list.php" , new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-
-                //    Toast.makeText(getApplicationContext(), "toast no 1     "+response, Toast.LENGTH_SHORT).show();
+                  Toast.makeText(getApplicationContext(), "toast no 1     "+response, Toast.LENGTH_SHORT).show();
                     JSONArray mainObject = new JSONArray(response);
                     for (int n = 0; n < mainObject.length(); n++) {
                         JSONObject result = mainObject.getJSONObject(n);
-
                         String item_categories= result.getString("item_categories");
                         String req_user_name= result.getString("req_user_name");
-
                         String quantity_unit= result.getString("quantity_unit");
                         String item_name= result.getString("item_name");
                         String req_price= result.getString("req_price");
@@ -68,6 +67,7 @@ public class requests extends AppCompatActivity {
                         String req_occupation= result.getString("req_occupation");
                         String req_email= result.getString("req_email");
                         String req_contact_no= result.getString("req_contact_no");
+                        String distance= result.getString("distance");
                         //   Toast.makeText(getApplicationContext(), "toast no 5     ", Toast.LENGTH_SHORT).show();
                         String request_timestamp= result.getString("request_timestamp");
                         rentalProperties.add(new Property(item_categories,
@@ -87,7 +87,8 @@ public class requests extends AppCompatActivity {
                                 req_occupation ,
                                 req_email,
                                 req_contact_no,
-                                request_timestamp));
+                                request_timestamp,
+                        distance));
                     }
 
                     ListView listView = (ListView) findViewById(R.id.customListView);
@@ -118,6 +119,8 @@ public class requests extends AppCompatActivity {
                             intent.putExtra("req_email", property.getReq_email());
                             intent.putExtra("req_contact_no", property.getReq_contact_no());
                             intent.putExtra("request_timestamp", property.getRequest_timestamp());
+                            intent.putExtra("type","request");
+                            intent.putExtra("distance",property.getDistance());
                             startActivity(intent);
                         }
                     };
@@ -141,17 +144,8 @@ public class requests extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                       /* params.put("contact_no",numberPerson);
-                        params.put("password",mpassword);
-                        params.put("full_name",names);
-                        params.put("blood_group",blood_group);
-                        params.put("age",agePerson);
-                        params.put("sex",sexPerson);
-                        params.put("email",emailadd);
-                        params.put("address",maddress);
-                        params.put("address_latitude",Tlatit);
-                        params.put("address_longitude",Tlongi);
-                        */
+                params.put("id_user",user_details.id_user);
+                params.put("login_token",user_details.login_token);
                 return params;
             }
         };
@@ -246,15 +240,10 @@ public class requests extends AppCompatActivity {
                     imgsrc="img_agro";
                 }
             }
-
-
             int imageID = context.getResources().getIdentifier(imgsrc, "drawable", context.getPackageName());
             image.setImageResource(imageID);
 
             return view;
         }
     }
-
-
 }
-

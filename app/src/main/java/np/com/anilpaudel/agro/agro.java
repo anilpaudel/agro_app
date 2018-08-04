@@ -30,69 +30,71 @@ package np.com.anilpaudel.agro;
         import java.util.List;
         import java.util.Map;
 public class agro extends AppCompatActivity {
+    private final ArrayList<Property1> rentalProperties = new ArrayList<>();
 
-    private ArrayList<Property> rentalProperties = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agro);
-        final ArrayAdapter<Property> adapter = new propertyArrayAdapter(this, 0, rentalProperties);
-
+        final preferences_server_ip ip=new preferences_server_ip(getApplicationContext());
+        final preferences_user_details user_details=new preferences_user_details(getApplicationContext());
+        final ArrayAdapter<Property1> adapter = new property1ArrayAdapter(this, 0, rentalProperties);
         final RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://192.168.0.7/agro/request_list.php", new Response.Listener<String>() {
+        Toast.makeText(getApplicationContext(),user_details.contact_no,Toast.LENGTH_SHORT).show();
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, ip.ip_server+"product_list.php", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-
-                 //   Toast.makeText(getApplicationContext(), "toast no 1     "+response, Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "toast no 1     "+response, Toast.LENGTH_SHORT).show();
                     JSONArray mainObject = new JSONArray(response);
                     for (int n = 0; n < mainObject.length(); n++) {
                         JSONObject result = mainObject.getJSONObject(n);
-
                         String item_categories= result.getString("item_categories");
-                        String req_user_name= result.getString("req_user_name");
-
+                        String pro_user_name= result.getString("pro_user_name");
                         String quantity_unit= result.getString("quantity_unit");
                         String item_name= result.getString("item_name");
-                        String req_price= result.getString("req_price");
-                        String req_price_unit= result.getString("req_price_unit");
+                        String pro_price= result.getString("pro_price");
+                        String pro_price_unit= result.getString("pro_price_unit");
                         String quantity= result.getString("quantity");
-                        String req_end_date= result.getString("req_end_date");
-                        String req_address= result.getString("req_address");
-                        String req_address_name= result.getString("req_address_name");
-                        String req_address_latitude= result.getString("req_address_latitude");
-                        String req_address_longitude= result.getString("req_address_longitude");
-                        String req_description= result.getString("req_description");
-                        String req_user_id= result.getString("req_user_id");
-                        String req_occupation= result.getString("req_occupation");
-                        String req_email= result.getString("req_email");
-                        String req_contact_no= result.getString("req_contact_no");
-                        //   Toast.makeText(getApplicationContext(), "toast no 5     ", Toast.LENGTH_SHORT).show();
-                        String request_timestamp= result.getString("request_timestamp");
-                        rentalProperties.add(new Property(item_categories,
-                                req_user_name,
+                        String pro_end_date= result.getString("pro_end_date");
+                        String pro_address= result.getString("pro_address");
+                        String pro_address_name= result.getString("pro_address_name");
+                        String pro_address_latitude= result.getString("pro_address_latitude");
+                        String pro_address_longitude= result.getString("pro_address_longitude");
+                        String pro_description= result.getString("pro_description");
+                        String pro_user_id= result.getString("pro_user_id");
+                        String pro_occupation= result.getString("pro_occupation");
+                        String pro_email= result.getString("pro_email");
+                        String pro_contact_no= result.getString("pro_contact_no");
+                        String product_timestamp= result.getString("product_timestamp");
+                        String distance=result.getString("distance");
+                        rentalProperties.add(new Property1(
+                                item_categories,
+                                pro_user_name,
                                 quantity_unit,
                                 item_name ,
-                                req_price,
-                                req_price_unit,
+                                pro_price,
+                                pro_price_unit,
                                 quantity,
-                                req_end_date,
-                                req_address,
-                                req_address_name,
-                                req_address_latitude,
-                                req_address_longitude,
-                                req_description,
-                                req_user_id,
-                                req_occupation ,
-                                req_email,
-                                req_contact_no,
-                                request_timestamp));
+                                pro_end_date,
+                                pro_address,
+                                pro_address_name,
+                                pro_address_latitude,
+                                pro_address_longitude,
+                                pro_description,
+                                pro_user_id,
+                                pro_occupation ,
+                                pro_email,
+                                pro_contact_no,
+                                product_timestamp,
+                                distance));
                     }
+                    Toast.makeText(getApplicationContext(), "toast no 5     ", Toast.LENGTH_SHORT).show();
 
                    // Toast.makeText(getApplicationContext(), "toast no 6     ", Toast.LENGTH_SHORT).show();
                     ListView listView = (ListView) findViewById(R.id.customListView);
-
+Toast.makeText(getApplicationContext(),user_details.contact_no,Toast.LENGTH_SHORT).show();
                    // Toast.makeText(getApplicationContext(), "toast no 7     ", Toast.LENGTH_SHORT).show();
                     listView.setAdapter(adapter);
                     AdapterView.OnItemClickListener adapterViewListener = new AdapterView.OnItemClickListener() {
@@ -100,27 +102,29 @@ public class agro extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                            Property property = rentalProperties.get(position);
+                            Property1 property1 = rentalProperties.get(position);
 
                             Intent intent = new Intent(agro.this, DetailActivity.class);
-                            intent.putExtra("item_categories", property.getItem_categories());
-                            intent.putExtra(" req_user_name", property.getReq_user_name());
-                            intent.putExtra(" quantity_unit", property.getQuantity_unit());
-                            intent.putExtra("item_name ", property.getItem_name());
-                            intent.putExtra("req_price", property.getReq_price());
-                            intent.putExtra("req_price_unit", property.getReq_price_unit());
-                            intent.putExtra("quantity", property.getQuantity());
-                            intent.putExtra("req_end_date", property.getReq_end_date());
-                            intent.putExtra("req_address", property.getReq_address());
-                            intent.putExtra("req_address_name", property.getReq_address_name());
-                            intent.putExtra("req_address_latitude", property.getReq_address_latitude());
-                            intent.putExtra("req_address_longitude", property.getReq_address_longitude());
-                            intent.putExtra("req_description", property.getReq_description());
-                            intent.putExtra("req_user_id", property.getReq_user_id());
-                            intent.putExtra("req_occupation ", property.getReq_occupation());
-                            intent.putExtra("req_email", property.getReq_email());
-                            intent.putExtra("req_contact_no", property.getReq_contact_no());
-                            intent.putExtra("request_timestamp", property.getRequest_timestamp());
+                            intent.putExtra("item_categories", property1.getItem_categories());
+                            intent.putExtra("pro_user_name", property1.getPro_user_name());
+                            intent.putExtra("quantity_unit", property1.getQuantity_unit());
+                            intent.putExtra("item_name ", property1.getItem_name());
+                            intent.putExtra("pro_price", property1.getPro_price());
+                            intent.putExtra("pro_price_unit", property1.getPro_price_unit());
+                            intent.putExtra("quantity", property1.getQuantity());
+                            intent.putExtra("pro_end_date", property1.getPro_end_date());
+                            intent.putExtra("pro_address", property1.getPro_address());
+                            intent.putExtra("pro_address_name", property1.getPro_address_name());
+                            intent.putExtra("pro_address_latitude", property1.getPro_address_latitude());
+                            intent.putExtra("pro_address_longitude", property1.getPro_address_longitude());
+                            intent.putExtra("pro_description", property1.getPro_description());
+                            intent.putExtra("pro_user_id", property1.getPro_user_id());
+                            intent.putExtra("pro_occupation ", property1.getPro_occupation());
+                            intent.putExtra("pro_email", property1.getPro_email());
+                            intent.putExtra("pro_contact_no", property1.getPro_contact_no());
+                            intent.putExtra("product_timestamp", property1.getProduct_timestamp());
+                            intent.putExtra("distance",property1.getDistance());
+                            intent.putExtra("type","product");
                             startActivity(intent);
                         }
                     };
@@ -144,8 +148,9 @@ public class agro extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                       /* params.put("contact_no",numberPerson);
-                        params.put("password",mpassword);
+                       params.put("id_user",user_details.id_user);
+                       params.put("login_token",user_details.login_token);
+                        /*
                         params.put("full_name",names);
                         params.put("blood_group",blood_group);
                         params.put("age",agePerson);
@@ -166,13 +171,13 @@ public class agro extends AppCompatActivity {
 
 
     //custom ArrayAdapater
-    class propertyArrayAdapter extends ArrayAdapter<Property> {
+    class property1ArrayAdapter extends ArrayAdapter<Property1> {
 
         private Context context;
-        private List<Property> rentalProperties;
+        private List<Property1> rentalProperties;
 
         //constructor, call on creation
-        public propertyArrayAdapter(Context context, int resource, ArrayList<Property> objects) {
+        public property1ArrayAdapter(Context context, int resource, ArrayList<Property1> objects) {
             super(context, resource, objects);
 
             this.context = context;
@@ -183,7 +188,7 @@ public class agro extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
 
             //get the property we are displaying
-            Property property = rentalProperties.get(position);
+            Property1 property1 = rentalProperties.get(position);
 
             //get the inflater and inflate the XML layout for each item
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
@@ -200,27 +205,27 @@ public class agro extends AppCompatActivity {
             ImageView image = (ImageView) view.findViewById(R.id.image_category);
 
             //set address and description
-            //     String completeAddress = property.getStreetNumber() + " " + property.getStreetName() + ", " + property.getSuburb() + ", " + property.getState();
+            //     String completeAddress = property1.getStreetNumber() + " " + property1.getStreetName() + ", " + property1.getSuburb() + ", " + property1.getState();
             //  address.setText(completeAddress);
 
             //display trimmed excerpt for description
-            //   int descriptionLength = property.getDescription().length();
+            //   int descriptionLength = property1.getDescription().length();
             //  if(descriptionLength >= 100){
-            //    String descriptionTrim = property.getDescription().substring(0, 100) + "...";
+            //    String descriptionTrim = property1.getDescription().substring(0, 100) + "...";
             //  description.setText(descriptionTrim);
             //  }else{
-            //    description.setText(property.getDescription());
+            //    description.setText(property1.getDescription());
             // }
 
             //set price and rental attributes
             //
-            category.setText( String.valueOf(property.getItem_categories()));
-            view_time.setText(String.valueOf(property.getRequest_timestamp()));
-            view_address.setText(String.valueOf(property.getReq_address_name()));
-            view_name.setText( String.valueOf(property.getItem_name()));
+            category.setText( String.valueOf(property1.getItem_categories()));
+            view_time.setText(String.valueOf(property1.getProduct_timestamp()));
+            view_address.setText(String.valueOf(property1.getPro_address_name()));
+            view_name.setText( String.valueOf(property1.getItem_name()));
 
             //get the image associated with this property
-            String cate=String.valueOf(property.getItem_categories());
+            String cate=String.valueOf(property1.getItem_categories());
             String imgsrc="";
             switch (cate)
             {
@@ -257,7 +262,4 @@ public class agro extends AppCompatActivity {
             return view;
         }
     }
-
-
 }
-

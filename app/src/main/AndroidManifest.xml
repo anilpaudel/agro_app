@@ -42,7 +42,9 @@
         <activity android:name=".sign_up" />
         <activity android:name=".about" />
         <activity android:name=".requests" />
-        <activity android:name=".DetailActivity"></activity>
+        <activity android:name=".DetailActivity" />
+        <activity android:name=".server_set_up" />
+        <activity android:name=".my_DetailActivity"></activity>
     </application>
 
 </manifest>
